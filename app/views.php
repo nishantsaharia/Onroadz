@@ -223,7 +223,7 @@ function booking_confirmation_page():void {
  $b=($state&&hash_equals($state['ref'],$ref))?booking_for_customer($ref,$state['secret']):null;
  head_html('Booking Request Acknowledgement | SAAFAAR','Private booking request acknowledgement.','/booking-confirmation/','meghalaya-hills.webp',true);
  site_header('');
- if(!$b):?><div class="section-block info-empty"><h1>Booking details are private.</h1><p>Open this page from your original booking session, or use Manage Booking with your private access code.</p><a class="btn btn-dark" href="/manage-booking/">Manage booking</a></div><?php site_footer();return;}?>
+ if(!$b){?><div class="section-block info-empty"><h1>Booking details are private.</h1><p>Open this page from your original booking session, or use Manage Booking with your private access code.</p><a class="btn btn-dark" href="/manage-booking/">Manage booking</a></div><?php site_footer();return;}?>
 <div class="section-block"><div class="confirmation-card"><span class="status-pill">REQUEST RECEIVED · PENDING REVIEW</span><h1>You're on the right road.</h1><p>We’ve recorded your request under reference <strong><?=e($ref)?></strong>. It is <strong>not confirmed</strong> until staff complete their review.</p>
 <div class="reference-box"><span>BOOKING REFERENCE</span><strong><?=e($ref)?></strong></div>
 <div class="reference-box"><span>PRIVATE ACCESS CODE — SAVE THIS</span><strong class="secret-code"><?=e($state['secret'])?></strong></div>
