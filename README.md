@@ -8,7 +8,7 @@ If GitHub shows the file page, use **Download raw file**. The archive contains t
 
 This branch delivers the existing ZIP only. It does not deploy a website or modify an existing application branch.
 
-SHA-256: `c59e30aaf7baf072ee6211bc165b024cfb9bc5275b4f20ca92e3f376469be046`
+SHA-256: `521d2344b33c8e65d33f20cf1c7763090cf1182fd2ad5bc8fff63e04e9e9ce39`
 
 ## Hosting startup update
 
