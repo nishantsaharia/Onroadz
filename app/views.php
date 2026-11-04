@@ -203,7 +203,7 @@ function request_booking_page():void {
  head_html('Request a Self Drive Booking | SAAFAAR','Submit a SAAFAAR booking request for an approved vehicle. Staff confirmation is required.','/request-booking/','meghalaya-hills.webp',true);
  site_header('/search/');
  title_banner('REQUEST A BOOKING','Make the next journey yours.','Submit dates and contact details. You will receive an acknowledgement, not an automatic reservation.');
- if(!$v):?><div class="section-block info-empty"><h2>Select an approved car first.</h2><p>Requests can only be submitted against actual approved inventory. Browse the garage or send a general enquiry.</p><a class="btn btn-dark" href="/cars/">Explore cars <?=svg_icon('arrow')?></a> <a class="text-link" href="/enquire/">Send an enquiry</a></div><?php site_footer();return;}?>
+ if(!$v){?><div class="section-block info-empty"><h2>Select an approved car first.</h2><p>Requests can only be submitted against actual approved inventory. Browse the garage or send a general enquiry.</p><a class="btn btn-dark" href="/cars/">Explore cars <?=svg_icon('arrow')?></a> <a class="text-link" href="/enquire/">Send an enquiry</a></div><?php site_footer();return;}?>
 <section class="section-block"><div class="booking-form-layout"><div class="form-card"><span class="eyebrow">YOUR REQUEST</span><h2><?=e($v['make'].' '.$v['model'])?></h2><p>Provide complete details and double-check the dates. Pricing shown is provisional until reviewed.</p>
 <form method="post" action="/request-booking/" class="stacked-form">
 <input type="hidden" name="_csrf" value="<?=e(csrf_token())?>"><input type="hidden" name="vehicle_id" value="<?=(int)$v['id']?>">
