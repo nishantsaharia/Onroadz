@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /manage-booking/
+Disallow: /request-booking/
+Disallow: /booking-confirmation/
+Disallow: /search/
+Disallow: /enquire/
+Disallow: /offline/
+Disallow: /404/
+Disallow: /app/
+Disallow: /database/
+Disallow: /storage/
+Sitemap: https://saafaar.in/sitemap.xml

@@ -1,0 +1,26 @@
+Options -Indexes -MultiViews
+DirectoryIndex index.php
+RewriteEngine On
+# Canonical HTTPS and non-www; adjust only after confirming SSL works.
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\.saafaar\.in$ [NC]
+RewriteRule ^ https://saafaar.in%{REQUEST_URI} [R=301,L,NE]
+# Deny access to application source and protected folders.
+RewriteRule ^(?:app|bin|database|docs|storage|tests)/ - [F,L,NC]
+RewriteRule (^|/)\.(?!well-known/) - [F,L]
+RewriteRule ^assets/uploads/.*\.(?:php|phtml|phar|cgi|pl|sh)$ - [F,L,NC]
+# Route all non-existent paths to the PHP application.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+<IfModule mod_headers.c>
+ Header always set X-Content-Type-Options "nosniff"
+ Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+<IfModule mod_expires.c>
+ ExpiresActive On
+ ExpiresByType image/webp "access plus 30 days"
+ ExpiresByType image/svg+xml "access plus 7 days"
+ ExpiresByType text/css "access plus 7 days"
+ ExpiresByType application/javascript "access plus 7 days"
+</IfModule>

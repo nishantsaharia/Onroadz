@@ -1,0 +1,57 @@
+name: Assemble and test SAAFAAR Aether ZIP
+on:
+  push:
+    branches: [saafaar-aether-full-site]
+    paths-ignore:
+      - "assets/img/**"
+      - "assets/icons/**"
+      - "favicon.ico"
+      - "apple-touch-icon.png"
+      - "SAAFAAR-AETHER-FULL-WEBSITE.zip"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Bundle owned photos and brand icons
+        run: python3 scripts/build_assets.py
+      - name: Validate PHP routes
+        run: bash tests/smoke.sh
+      - name: Validate sitemap and images
+        run: |
+          python3 - <<'PY'
+          import json,xml.etree.ElementTree as ET,pathlib
+          p=pathlib.Path('.')
+          json.loads((p/'site.webmanifest').read_text())
+          ET.parse(p/'sitemap.xml')
+          for fn in ['meghalaya-waterfall.webp','meghalaya-hills.webp','arunachal-mountains.webp','kaziranga-rhino.webp','saafaar-logo.webp']:
+            f=p/'assets/img'/fn
+            assert f.exists() and f.stat().st_size>1000,str(f)
+          print("Valid sitemap, PWA manifest and original SAAFAAR photos")
+          PY
+      - name: Create standalone cPanel package
+        run: |
+          rm -f SAAFAAR-AETHER-FULL-WEBSITE.zip
+          zip -qr SAAFAAR-AETHER-FULL-WEBSITE.zip . -x ".git/*" ".github/*" "SAAFAAR-AETHER-FULL-WEBSITE.zip" ".env"
+          unzip -tqq SAAFAAR-AETHER-FULL-WEBSITE.zip
+          ls -lh SAAFAAR-AETHER-FULL-WEBSITE.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SAAFAAR-AETHER-FULL-WEBSITE
+          path: SAAFAAR-AETHER-FULL-WEBSITE.zip
+          retention-days: 30
+      - name: Publish tested package to download branch
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add assets/img assets/icons favicon.ico apple-touch-icon.png SAAFAAR-AETHER-FULL-WEBSITE.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "Bundle verified SAAFAAR original photos and tested Aether ZIP"
+            git push origin HEAD:saafaar-aether-full-site
+          fi

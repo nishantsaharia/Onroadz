@@ -1,15 +1,23 @@
-# SAAFAAR website source package
+# SAAFAAR HOLIDAYS — Premium Aether Website
+Independent SAAFAAR brand · PHP 8.2+ / MySQL / Apache · white dashboard UI with black booking interface and red accents.
 
-Download [SAAFAAR-FINAL-WEBSITE.zip](./SAAFAAR-FINAL-WEBSITE.zip?raw=true).
+Pages:
+- / — homepage
+- /cars/ and /cars/{slug}/ — approved cars and details
+- /travel-guides/ and /travel-guides/{slug}/ — original editorial
+- /search/ — date/location availability query
+- /request-booking/ — booking request, server-validated
+- /booking-confirmation/ — private request acknowledgement
+- /manage-booking/ — reference + private access code
+- /enquire/ (also /enquire) — contact enquiry
+- /offline/ — offline fallback
+- /404/ — correct 404 response
+- /contact/ — direct contact
+- /admin/ — independent fleet and booking admin
+- 25+ informational, commercial and Northeast India SEO routes
 
-If GitHub shows the file page, use **Download raw file**. The archive contains the PHP/MySQL website source, installation schema, cPanel deployment documentation, test reports and approval checklist.
+Instructions: docs/INSTALLATION.md
+Photo manifest: docs/ASSET-MANIFEST.md
+Approval/testing limits: docs/QA-AND-APPROVALS.md
 
-**Pre-launch package:** official logo and photographs, approved inventory/rates, legal policies and receiving-account verification remain required. Defaults are staging/noindex with payments disabled. Read the included README and docs/REQUIRED-APPROVALS.md before launch.
-
-This branch delivers the existing ZIP only. It does not deploy a website or modify an existing application branch.
-
-SHA-256: `521d2344b33c8e65d33f20cf1c7763090cf1182fd2ad5bc8fff63e04e9e9ce39`
-
-## Hosting startup update
-
-Download [SAAFAAR-HOSTING-UPDATE.zip](./SAAFAAR-HOSTING-UPDATE.zip?raw=true) for existing installations. Read [HTTP-500-TROUBLESHOOTING.md](./HTTP-500-TROUBLESHOOTING.md) first and preserve your private configuration, policies, database and images. The full website ZIP above is also refreshed for new installations. A standalone [hosting-check.php](./hosting-check.php?raw=true) can be temporarily uploaded to the domain document root to report non-secret prerequisites. Delete it after diagnosis. No live hosting cause has been confirmed without its error log.
+The public SAAFAAR imagery is downloaded and packaged by the GitHub workflow. No Onroadz customer data, configuration or credentials are used. SAAFAAR is a separate brand.
